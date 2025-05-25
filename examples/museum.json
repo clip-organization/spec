@@ -1,0 +1,177 @@
+{
+  "@context": "https://clipprotocol.org/v1",
+  "type": "Venue",
+  "id": "clip:us:dc:museum:natural-history",
+  "name": "National Museum of Natural History",
+  "description": "Explore the natural world through extraordinary specimens, interactive exhibits, and immersive experiences at one of the world's most visited museums.",
+  "lastUpdated": "2025-05-25T14:30:00Z",
+  "location": {
+    "address": "10th St. & Constitution Ave. NW, Washington, DC 20560",
+    "coordinates": {
+      "latitude": 38.8913,
+      "longitude": -77.0261
+    },
+    "timezone": "America/New_York",
+    "accessibility": ["wheelchair", "elevator", "braille", "sign_language_tours", "audio_descriptions"]
+  },
+  "features": [
+    {
+      "name": "Hope Diamond",
+      "type": "exhibit",
+      "status": "on_display",
+      "metadata": {
+        "location": "Harry Winston Gallery",
+        "floor": "2",
+        "description": "45.52-carat deep-blue diamond",
+        "audioGuideId": "HD-001",
+        "crowdLevel": "moderate"
+      }
+    },
+    {
+      "name": "Hall of Fossils",
+      "type": "exhibit_hall",
+      "status": "open",
+      "capacity": 500,
+      "metadata": {
+        "currentVisitors": 237,
+        "featuredSpecimen": "T. Rex Nation's T. rex",
+        "floor": "1",
+        "recommendedTime": "45-60 minutes"
+      }
+    },
+    {
+      "name": "Butterfly Pavilion",
+      "type": "living_exhibit",
+      "status": "open",
+      "metadata": {
+        "temperature": "80F",
+        "humidity": "70%",
+        "speciesCount": 400,
+        "ticketRequired": true,
+        "nextAvailable": "2025-05-25T16:00:00Z"
+      }
+    },
+    {
+      "name": "Ocean Hall",
+      "type": "exhibit_hall",
+      "status": "open",
+      "metadata": {
+        "highlight": "45-foot North Atlantic Right Whale model",
+        "floor": "1",
+        "interactiveStations": 12
+      }
+    },
+    {
+      "name": "Planetarium",
+      "type": "theater",
+      "capacity": 200,
+      "status": "showing",
+      "metadata": {
+        "currentShow": "Journey to the Stars",
+        "nextShowTime": "2025-05-25T15:30:00Z",
+        "duration": "25 minutes",
+        "ticketsAvailable": 47
+      }
+    },
+    {
+      "name": "Museum Cafe",
+      "type": "amenity",
+      "status": "open",
+      "metadata": {
+        "waitTime": "5 minutes",
+        "menuType": "casual_dining",
+        "hours": "10:00-17:00"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "label": "Buy Tickets",
+      "type": "link",
+      "endpoint": "https://naturalhistory.si.edu/visit/tickets",
+      "description": "Purchase general admission and special exhibit tickets"
+    },
+    {
+      "label": "Virtual Tour",
+      "type": "link", 
+      "endpoint": "https://naturalhistory.si.edu/virtual-tour",
+      "description": "Explore the museum from home with our 360° virtual experience"
+    },
+    {
+      "label": "Chat with Museum Guide",
+      "type": "chat",
+      "endpoint": "https://chat.si.edu/natural-history-guide",
+      "description": "Get personalized tour recommendations and exhibit information"
+    },
+    {
+      "label": "Download Museum App",
+      "type": "link",
+      "endpoint": "https://apps.si.edu/natural-history",
+      "description": "Interactive maps, audio guides, and AR experiences"
+    },
+    {
+      "label": "Join Live Expert Talk",
+      "type": "api",
+      "endpoint": "https://api.si.edu/natural-history/live-talks",
+      "description": "Connect with museum scientists and educators"
+    }
+  ],
+  "persona": {
+    "role": "Museum Curator & Guide",
+    "personality": "knowledgeable, enthusiastic, educational, inclusive",
+    "expertise": [
+      "natural history",
+      "earth sciences", 
+      "biodiversity",
+      "human origins",
+      "gems and minerals",
+      "ocean life"
+    ],
+    "prompt": "You are Dr. Ellis, a friendly museum curator at the National Museum of Natural History. Share fascinating facts about exhibits, help visitors plan their visit based on interests and time available, and make science accessible to all ages. Express genuine enthusiasm for natural history.",
+    "constraints": [
+      "Provide scientifically accurate information",
+      "Make content age-appropriate when children are mentioned",
+      "Include accessibility information when relevant",
+      "Mention free admission but note some special exhibits may charge"
+    ],
+    "preferences": {
+      "communicationStyle": "educational yet conversational",
+      "responseLength": "moderate",
+      "useEmoji": true
+    }
+  },
+  "services": [
+    {
+      "type": "http",
+      "endpoint": "https://api.si.edu/natural-history/live",
+      "updateFrequency": "PT10M",
+      "authentication": "none",
+      "description": "Real-time visitor counts, wait times, and exhibit status"
+    },
+    {
+      "type": "mcp",
+      "endpoint": "mcp://si.edu/natural-history",
+      "capabilities": ["exhibit_info", "tour_planning", "event_schedule", "accessibility_services", "education_resources"]
+    },
+    {
+      "type": "websocket",
+      "endpoint": "wss://live.si.edu/natural-history",
+      "protocol": "museum-live-v1",
+      "description": "Live updates for crowd levels, show times, and special events"
+    }
+  ],
+  "locales": {
+    "es": {
+      "name": "Museo Nacional de Historia Natural",
+      "description": "Explore el mundo natural a través de especímenes extraordinarios, exhibiciones interactivas y experiencias inmersivas."
+    },
+    "fr": {
+      "name": "Musée National d'Histoire Naturelle",
+      "description": "Explorez le monde naturel à travers des spécimens extraordinaires, des expositions interactives et des expériences immersives."
+    },
+    "zh": {
+      "name": "国家自然历史博物馆",
+      "description": "通过非凡的标本、互动展览和沉浸式体验探索自然世界。"
+    }
+  }
+} 

@@ -1,0 +1,151 @@
+{
+  "@context": "https://clipprotocol.org/v1",
+  "type": "Device",
+  "id": "clip:device:samsung:rf28r7351sg:sn-a1b2c3d4",
+  "name": "Kitchen Smart Fridge",
+  "description": "Samsung Family Hub 3.0 Smart Refrigerator with AI-powered inventory management and 28 cu. ft. capacity",
+  "lastUpdated": "2025-05-25T15:45:00Z",
+  "location": {
+    "address": "Kitchen, Johnson Residence",
+    "timezone": "America/Chicago"
+  },
+  "features": [
+    {
+      "name": "Milk (2% Reduced Fat)",
+      "type": "inventory",
+      "count": 1,
+      "metadata": {
+        "brand": "Organic Valley",
+        "expiryDate": "2025-05-30",
+        "quantity": "0.5 gallons",
+        "location": "top_shelf_right"
+      }
+    },
+    {
+      "name": "Eggs (Large)",
+      "type": "inventory", 
+      "count": 18,
+      "metadata": {
+        "brand": "Happy Farms",
+        "expiryDate": "2025-06-08",
+        "location": "door_compartment_2"
+      }
+    },
+    {
+      "name": "Greek Yogurt",
+      "type": "inventory",
+      "count": 4,
+      "metadata": {
+        "brand": "Chobani",
+        "flavor": "Mixed Berry",
+        "expiryDate": "2025-06-01",
+        "location": "middle_shelf_left"
+      }
+    },
+    {
+      "name": "Fresh Vegetables",
+      "type": "inventory_category",
+      "count": 12,
+      "metadata": {
+        "items": ["carrots", "broccoli", "bell_peppers", "spinach"],
+        "location": "crisper_drawer_1"
+      }
+    },
+    {
+      "name": "Temperature Control",
+      "type": "capability",
+      "status": "active",
+      "metadata": {
+        "fridge_temp": "37F",
+        "freezer_temp": "0F",
+        "energy_mode": "efficient"
+      }
+    },
+    {
+      "name": "Door Open Alert",
+      "type": "capability",
+      "status": "monitoring",
+      "metadata": {
+        "last_opened": "2025-05-25T15:42:00Z",
+        "alert_threshold": "60_seconds"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "label": "View Inside Camera",
+      "type": "link",
+      "endpoint": "https://smartthings.samsung.com/fridge/camera",
+      "description": "Check fridge contents remotely via internal cameras"
+    },
+    {
+      "label": "Create Shopping List",
+      "type": "api",
+      "endpoint": "https://api.samsung.com/fridge/shopping-list",
+      "description": "Generate shopping list based on inventory and expiring items"
+    },
+    {
+      "label": "Adjust Temperature",
+      "type": "api",
+      "endpoint": "https://api.samsung.com/fridge/temperature",
+      "description": "Remotely control fridge and freezer temperatures"
+    },
+    {
+      "label": "Chat with Kitchen Assistant",
+      "type": "chat",
+      "endpoint": "https://assistant.samsung.com/kitchen-ai",
+      "description": "Get recipe suggestions based on available ingredients"
+    }
+  ],
+  "persona": {
+    "role": "Smart Kitchen Assistant",
+    "personality": "helpful, practical, eco-conscious",
+    "expertise": [
+      "food storage",
+      "expiration tracking",
+      "recipe suggestions",
+      "energy efficiency",
+      "meal planning"
+    ],
+    "prompt": "You are the AI assistant for a Samsung Smart Fridge. Help users manage their food inventory, suggest recipes based on available ingredients, remind about expiring items, and provide food storage tips. Be practical and focus on reducing food waste.",
+    "constraints": [
+      "Do not provide medical or dietary advice",
+      "Always mention checking expiration dates",
+      "Suggest using items that will expire soon",
+      "Promote energy-efficient usage"
+    ],
+    "preferences": {
+      "communicationStyle": "friendly and practical",
+      "responseLength": "brief",
+      "useEmoji": false
+    }
+  },
+  "services": [
+    {
+      "type": "http",
+      "endpoint": "https://api.samsung.com/devices/rf28r7351sg/status",
+      "updateFrequency": "PT1M",
+      "authentication": "apikey"
+    },
+    {
+      "type": "mcp",
+      "endpoint": "mcp://samsung.com/smartthings/fridge",
+      "capabilities": ["inventory_management", "temperature_control", "diagnostics", "energy_monitoring"]
+    },
+    {
+      "type": "websocket",
+      "endpoint": "wss://iot.samsung.com/fridge/a1b2c3d4",
+      "protocol": "smartthings-v2",
+      "description": "Real-time alerts for door open, temperature changes, and maintenance"
+    }
+  ],
+  "metadata": {
+    "manufacturer": "Samsung",
+    "model": "RF28R7351SG",
+    "serialNumber": "A1B2C3D4",
+    "firmwareVersion": "3.2.1",
+    "energyRating": "ENERGY_STAR",
+    "connectivity": ["wifi", "bluetooth", "zigbee"],
+    "lastMaintenance": "2025-03-15"
+  }
+} 

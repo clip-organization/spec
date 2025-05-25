@@ -1,0 +1,306 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://clipprotocol.org/schemas/v1/clip.schema.json",
+  "title": "CLIP (Context Link Interface Protocol) Schema",
+  "description": "Schema for validating CLIP objects that describe venues, devices, or services",
+  "type": "object",
+  "required": ["@context", "type", "id", "name", "description", "lastUpdated"],
+  "properties": {
+    "@context": {
+      "type": "string",
+      "const": "https://clipprotocol.org/v1",
+      "description": "Fixed value identifying the CLIP schema version"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["Venue", "Device", "SoftwareApp"],
+      "description": "The primary nature of the entity"
+    },
+    "id": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9+.-]*:",
+      "description": "Globally unique identifier using URI format",
+      "examples": ["clip:us:ny:gym:fitworks-manhattan"]
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Human-readable name of the entity"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500,
+      "description": "Brief description of the entity"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 datetime of last update"
+    },
+    "location": {
+      "type": "object",
+      "description": "Geographic location information",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "Physical street address"
+        },
+        "coordinates": {
+          "type": "object",
+          "required": ["latitude", "longitude"],
+          "properties": {
+            "latitude": {
+              "type": "number",
+              "minimum": -90,
+              "maximum": 90,
+              "description": "Latitude in decimal degrees (WGS84)"
+            },
+            "longitude": {
+              "type": "number",
+              "minimum": -180,
+              "maximum": 180,
+              "description": "Longitude in decimal degrees (WGS84)"
+            }
+          }
+        },
+        "timezone": {
+          "type": "string",
+          "description": "IANA timezone identifier",
+          "examples": ["America/New_York", "Europe/London", "Asia/Tokyo"]
+        },
+        "accessibility": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Accessibility features available",
+          "examples": [["wheelchair", "elevator", "braille"]]
+        }
+      },
+      "additionalProperties": true
+    },
+    "features": {
+      "type": "array",
+      "description": "List of capabilities, inventory, or characteristics",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the feature"
+          },
+          "type": {
+            "type": "string",
+            "description": "Category or type of feature"
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Total quantity available"
+          },
+          "available": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Currently available quantity"
+          },
+          "status": {
+            "type": "string",
+            "description": "Current status of the feature"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Additional custom properties",
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "actions": {
+      "type": "array",
+      "description": "Available interactive actions",
+      "items": {
+        "type": "object",
+        "required": ["label", "type", "endpoint"],
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "User-friendly action label"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["link", "chat", "call", "api", "custom"],
+            "description": "Type of action"
+          },
+          "endpoint": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL or URI for the action"
+          },
+          "description": {
+            "type": "string",
+            "description": "Additional details about the action"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "persona": {
+      "type": "object",
+      "description": "Agent behavior guidance",
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "Primary function or title"
+        },
+        "personality": {
+          "type": "string",
+          "description": "Behavioral traits"
+        },
+        "expertise": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Areas of specialized knowledge"
+        },
+        "prompt": {
+          "type": "string",
+          "description": "Specific instructions for agent behavior"
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Limitations and boundaries"
+        },
+        "preferences": {
+          "type": "object",
+          "description": "Communication style preferences",
+          "properties": {
+            "communicationStyle": {
+              "type": "string"
+            },
+            "responseLength": {
+              "type": "string"
+            },
+            "useEmoji": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "services": {
+      "type": "array",
+      "description": "Live data endpoints and integrations",
+      "items": {
+        "type": "object",
+        "required": ["type", "endpoint"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Service protocol type",
+            "examples": ["http", "mcp", "websocket"]
+          },
+          "endpoint": {
+            "type": "string",
+            "format": "uri",
+            "description": "Service endpoint URL"
+          },
+          "updateFrequency": {
+            "type": "string",
+            "pattern": "^P(?:\\d+Y)?(?:\\d+M)?(?:\\d+W)?(?:\\d+D)?(?:T(?:\\d+H)?(?:\\d+M)?(?:\\d+(?:\\.\\d+)?S)?)?$",
+            "description": "ISO 8601 duration format for update frequency"
+          },
+          "authentication": {
+            "type": "string",
+            "enum": ["none", "bearer", "apikey"],
+            "description": "Authentication method required"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Available capabilities for MCP services"
+          },
+          "protocol": {
+            "type": "string",
+            "description": "Protocol version or specification"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "glyphs": {
+      "type": "array",
+      "description": "Discovery mechanisms (reserved for future use)",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Glyph type identifier"
+          },
+          "data": {
+            "type": "string",
+            "description": "Glyph data payload"
+          },
+          "format": {
+            "type": "string",
+            "description": "Data format specification"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "signature": {
+      "type": "object",
+      "description": "Digital signature for verification",
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "description": "Signature algorithm used"
+        },
+        "keyId": {
+          "type": "string",
+          "description": "Key identifier"
+        },
+        "signature": {
+          "type": "string",
+          "description": "Base64 encoded signature"
+        }
+      },
+      "additionalProperties": true
+    },
+    "locales": {
+      "type": "object",
+      "description": "Localized content",
+      "patternProperties": {
+        "^[a-z]{2}(-[A-Z]{2})?$": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+} 

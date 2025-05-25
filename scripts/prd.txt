@@ -1,0 +1,137 @@
+<context>
+# Overview
+CLIP (Context Link Interface Protocol) is a universal, open JSON standard for exposing structured, machine- and LLM-friendly "context" about venues, devices, or services. This repository will serve as the canonical source for the CLIP standard, enabling any agent or AI to access real-time or static information about the physical or digital world.
+
+The spec repository aims to establish CLIP as the go-to standard for machine-readable context, similar to how RSS revolutionized content syndication. It provides schemas, specifications, examples, and validation tools for developers and organizations to create and consume CLIP-compliant data.
+
+# Core Features
+## CLIP Schema Definition
+- Comprehensive JSON Schema (draft 2020-12) for validation
+- Support for multiple object types: Venue, Device, SoftwareApp
+- Required fields enforcement: @context, type, id, name, description, lastUpdated
+- Optional fields for enhanced functionality: location, features, actions, persona, services, glyphs, signature, locales
+
+## Specification Documentation
+- Full Markdown specification detailing object models and field definitions
+- Usage guidelines and extensibility guidance
+- Agent/LLM interaction flow documentation
+- Non-normative notes about future glyph discovery mechanisms
+
+## Example Implementations
+- Real-world examples demonstrating CLIP usage
+- Gym venue example with equipment tracking and live data
+- Smart fridge device example with inventory management
+- Museum venue example with exhibit information
+
+## Validation and Testing
+- JSON Schema for automated validation
+- Test suite with valid and invalid examples
+- Clear validation instructions in documentation
+
+# User Experience
+## Target Users
+- **Agent/AI Developers**: Building intelligent assistants that need context about physical spaces
+- **Business Owners**: Wanting to expose their venue/service information to AI systems
+- **Device Manufacturers**: Creating smart devices that can communicate their state
+- **App Developers**: Building applications that consume or provide contextual information
+
+## Key User Flows
+1. **Discovery Flow**: User/agent discovers CLIP URL via QR code or other mechanism
+2. **Consumption Flow**: Agent fetches and parses CLIP data to understand context
+3. **Interaction Flow**: Agent uses persona guidance and available actions to engage
+4. **Validation Flow**: Developer validates their CLIP against the schema
+
+## UI/UX Considerations
+- Clear, developer-friendly documentation
+- Easy-to-follow examples
+- Straightforward validation process
+- Accessible contribution guidelines
+</context>
+<PRD>
+# Technical Architecture
+## Repository Structure
+- README.md - Project overview with quickstart guide
+- clip-spec.md - Complete specification document
+- clip.schema.json - JSON Schema for validation
+- examples/ directory with practical implementations
+- tests/ directory for validation test cases
+- LICENSE file (Apache-2.0)
+- .gitignore for standard exclusions
+
+## Data Models
+- Base CLIP object with required context fields
+- Venue type for physical locations
+- Device type for IoT and smart devices
+- SoftwareApp type for digital services
+- Extensible features array for capabilities/inventory
+- Services array for live data endpoints (HTTP, MCP)
+- Persona object for agent behavior guidance
+- Actions array for available interactions
+
+## Standards and Specifications
+- JSON Schema draft 2020-12 compliance
+- UTF-8 encoding requirement
+- ISO 8601 datetime formats
+- Semantic versioning for the spec itself
+- URI-based ID system for global uniqueness
+
+# Development Roadmap
+## MVP Requirements
+- Complete specification document with all field definitions
+- Functional JSON Schema that validates all object types
+- Three comprehensive examples (gym, fridge, museum)
+- Basic README with installation and usage instructions
+- Apache-2.0 license file
+- Repository initialization with proper .gitignore
+
+## Phase 2: Enhanced Documentation
+- Extended examples covering edge cases
+- Contribution guidelines
+- Schema migration guide for future versions
+- Best practices documentation
+- FAQ section addressing common questions
+
+## Phase 3: Tooling and Ecosystem
+- Validation CLI tool
+- Schema test suite
+- Example generator/templates
+- Documentation website
+- Community forum/discussion setup
+
+# Logical Dependency Chain
+1. **Foundation Setup**: Initialize repository structure, license, gitignore
+2. **Core Specification**: Define the complete CLIP specification document
+3. **Schema Development**: Create JSON Schema based on the specification
+4. **Example Creation**: Build practical examples demonstrating key features
+5. **Documentation**: Write comprehensive README and usage guides
+6. **Validation**: Implement test cases for schema validation
+7. **Polish**: Review, refine, and ensure consistency across all artifacts
+
+# Risks and Mitigations
+## Technical Challenges
+- **Schema Complexity**: Risk of overly complex schema → Start simple, iterate based on feedback
+- **Backwards Compatibility**: Future version conflicts → Clear versioning strategy from v1
+- **Adoption Barriers**: Developers finding it hard to implement → Provide clear examples and tools
+
+## Standards Alignment
+- **Competing Standards**: Other context protocols emerging → Focus on simplicity and LLM optimization
+- **Schema Evolution**: JSON Schema spec changes → Pin to specific draft version
+
+## Community Management
+- **Contribution Quality**: Inconsistent PRs → Clear contribution guidelines
+- **Feature Creep**: Scope expansion → Maintain focused vision on core use cases
+
+# Appendix
+## Related Standards
+- JSON-LD for linked data
+- Schema.org vocabularies
+- OpenAPI for API descriptions
+- MCP (Model Context Protocol) for AI integrations
+
+## Future Considerations
+- Glyph discovery mechanisms (QR, HexMatrix)
+- Signature/authentication methods
+- Localization strategies
+- Real-time update protocols
+- Privacy and security guidelines
+</PRD> 

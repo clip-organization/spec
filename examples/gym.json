@@ -1,0 +1,141 @@
+{
+  "@context": "https://clipprotocol.org/v1",
+  "type": "Venue",
+  "id": "clip:us:ny:gym:fitworks-manhattan",
+  "name": "FitWorks Manhattan",
+  "description": "Premium 24/7 fitness center with 78 equipment stations, group classes, and personal training services in the heart of Manhattan.",
+  "lastUpdated": "2025-05-25T16:00:00Z",
+  "location": {
+    "address": "123 Fitness Avenue, New York, NY 10001",
+    "coordinates": {
+      "latitude": 40.7589,
+      "longitude": -73.9851
+    },
+    "timezone": "America/New_York",
+    "accessibility": ["wheelchair", "elevator", "braille", "audio_guidance"]
+  },
+  "features": [
+    {
+      "name": "Smith Machine",
+      "type": "equipment",
+      "count": 2,
+      "available": 1,
+      "metadata": {
+        "brand": "Life Fitness",
+        "model": "SM-1000",
+        "maxWeight": "400lbs"
+      }
+    },
+    {
+      "name": "Treadmill",
+      "type": "equipment",
+      "count": 15,
+      "available": 8,
+      "metadata": {
+        "brand": "Precor",
+        "model": "TRM 885",
+        "features": ["TV", "heart_rate_monitor", "incline"]
+      }
+    },
+    {
+      "name": "Group Fitness Studio A",
+      "type": "facility",
+      "capacity": 30,
+      "status": "occupied",
+      "metadata": {
+        "currentClass": "Hot Yoga",
+        "instructor": "Sarah Chen",
+        "endsAt": "2025-05-25T17:30:00Z"
+      }
+    },
+    {
+      "name": "Olympic Pool",
+      "type": "facility",
+      "status": "open",
+      "metadata": {
+        "lanes": 8,
+        "temperature": "78F",
+        "depth": "3-12ft"
+      }
+    },
+    {
+      "name": "Personal Training Sessions",
+      "type": "service",
+      "available": 5,
+      "metadata": {
+        "priceRange": "$80-150/hour",
+        "specialties": ["strength", "cardio", "rehabilitation", "sports"]
+      }
+    }
+  ],
+  "actions": [
+    {
+      "label": "Book a Class",
+      "type": "link",
+      "endpoint": "https://fitworks.com/manhattan/book",
+      "description": "Reserve your spot in group fitness classes"
+    },
+    {
+      "label": "Chat with Fitness Coach",
+      "type": "chat",
+      "endpoint": "https://chat.openai.com/g/fitworks-coach",
+      "description": "Get personalized workout advice from our AI fitness coach"
+    },
+    {
+      "label": "Call Front Desk",
+      "type": "call",
+      "endpoint": "tel:+1-212-555-0100",
+      "description": "Speak with our staff for immediate assistance"
+    },
+    {
+      "label": "Virtual Tour",
+      "type": "link",
+      "endpoint": "https://fitworks.com/manhattan/tour",
+      "description": "Take a 360° virtual tour of our facilities"
+    }
+  ],
+  "persona": {
+    "role": "Certified Fitness Coach",
+    "personality": "energetic, supportive, knowledgeable, motivating",
+    "expertise": [
+      "strength training",
+      "cardiovascular fitness",
+      "nutrition basics",
+      "injury prevention",
+      "workout programming"
+    ],
+    "prompt": "You are Alex, a certified fitness coach at FitWorks Manhattan. Greet users warmly and with enthusiasm. Offer to help them design a workout plan based on their fitness goals, current level, and available equipment. Always emphasize proper form and safety.",
+    "constraints": [
+      "Always recommend consulting a doctor before starting new fitness programs",
+      "Do not provide medical diagnosis or treatment advice",
+      "Encourage users to work with in-person trainers for form checks",
+      "Respect individual fitness levels and limitations"
+    ],
+    "preferences": {
+      "communicationStyle": "encouraging and positive",
+      "responseLength": "concise but informative",
+      "useEmoji": true
+    }
+  },
+  "services": [
+    {
+      "type": "http",
+      "endpoint": "https://api.fitworks.com/clip/manhattan",
+      "updateFrequency": "PT5M",
+      "authentication": "none",
+      "description": "Real-time equipment availability and class schedules"
+    },
+    {
+      "type": "mcp",
+      "endpoint": "mcp://fitworks.com/manhattan",
+      "capabilities": ["equipment_status", "class_booking", "trainer_availability", "member_checkin"],
+      "authentication": "bearer"
+    },
+    {
+      "type": "websocket",
+      "endpoint": "wss://live.fitworks.com/manhattan",
+      "protocol": "clip-live-v1",
+      "description": "Live updates for equipment availability and class changes"
+    }
+  ]
+} 
